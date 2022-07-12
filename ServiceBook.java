@@ -7,13 +7,12 @@ import java.util.HashMap;
 import java.util.Scanner;
 public class ServiceBook {
 	static Scanner sc=new Scanner(System.in);
-	public static ArrayList<Contacts> listOfContacts;
-	public static HashMap<String,List<Contacts>> Hash=new HashMap<>();
+	public static ArrayList<Contacts> listOfContacts=new ArrayList<>();
+	public static HashMap<String,List<Contacts>> hashAddressBook=new HashMap<>();
 	public static HashMap<String, String> dictforcity=new HashMap<>();
 	public static HashMap<String, String> dictforstate=new HashMap<>();
-	public static Object addressBookMang;
     public static ArrayList<Contacts> findAddressBook(String name){
-		for(Entry<String, List<Contacts>> iterator:Hash.entrySet()) {
+		for(Entry<String, List<Contacts>> iterator:hashAddressBook.entrySet()) {
 			if(iterator.getKey().equals(name)) {
 				return (ArrayList<Contacts>) iterator.getValue();
 			}
@@ -26,7 +25,7 @@ public class ServiceBook {
 		String addressBookName=sc.next();
 		if(findAddressBook(addressBookName)!=null) {
 			System.out.println("this book exists");
-			System.out.println(Hash.get(addressBookName));
+			System.out.println(hashAddressBook.get(addressBookName));
 			return null;
 		}
 		return addressBookName;
@@ -62,14 +61,24 @@ public class ServiceBook {
 	    String email = sc.next();
 	    Contacts contact=new Contacts(first_name,last_name,Address,city,state,zip,phone_number,email);
 	    if(findAddressBook(bookName)!=null) {
-	    	Hash.get(bookName).add(contact);
+	         hashAddressBook.get(bookName).add(contact);
 	         return;
 	    }
 	    listOfContacts =new ArrayList<Contacts>();
 	    listOfContacts.add(contact);
 	    listOfContacts.add(new Contacts(first_name,last_name,Address,city,state,zip,phone_number,email));
-	    Hash.put(bookName, listOfContacts);
+        hashAddressBook.put(bookName, listOfContacts);
 	}
+	public static Contacts addContact() {
+		System.out.println("how many contact you want to add");
+		int n=sc.nextInt();
+		for(int i=0;i<n;i++) {
+			listOfContacts.add(addContact());
+			System.out.println();
+		}
+		return null;
+	}
+	
 	   public static void delete() {
 	    	System.out.println("Enter the address book you want to edit");
 	    	String deleteBook=sc.next();
@@ -117,7 +126,7 @@ public class ServiceBook {
 	    	if(Hash.get(bookName)==null) {
 	    		return true;
 	    	}
-	    	ArrayList<Contacts> list=(ArrayList<Contacts>) Hash.get(bookName);
+	    	ArrayList<Contacts> list=(ArrayList<Contacts>) hashAddressBook.get(bookName);
 	    	HashMap<String, String> name=new HashMap<>();
 	    	for(Contacts contact:listOfContacts) {
 	    		name.put(Contacts.getFirst_name(),contact.getLast_name());
@@ -143,12 +152,20 @@ public class ServiceBook {
         	long countstate=dictforstate.entrySet().stream().map(a->a.getValue().equals(state)).count();
         	System.out.println("count state by person"+countstate);
         }
-        
+        public static void sortAlphabatically() {
+        	System.out.println("Enter the name of adddress book");
+        	String name=sc.next();
+        	if(hashAddressBook.get(name).isEmpty()) {
+        		System.out.println("Book is empty");
+        		return;
+        	}
+        	hashAddressBook.get(name).stream().sorted((c1,c2)->Contacts.getFirst_name().compareToIgnoreCase(c2.getFirst_name())).forEach(c->System.out.println(c));
+        }
 	    
 	    public static void display() {
 	    	System.out.println("Enter the name of the address book you want see");
 	    	String name=sc.next();
-	    	if(Hash.get(name).isEmpty()) {
+	    	if(hashAddressBook.get(name).isEmpty()) {
 	    		System.out.println("this is emty");
 	    		return;
 	    	}

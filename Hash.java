@@ -3,6 +3,7 @@ package com.bridgelabz;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 public class Hash {
 	HashMap<String, ServiceBook> addressBook = new HashMap<>();
@@ -43,7 +44,7 @@ public class Hash {
    		System.out.println("this is not exist");
    		return;
    	}
-   	ServiceBook.addContacts();
+   	ServiceBook.addContacts(addressBook);
    }
    public void editContact() {
    	System.out.println("please enter the address book ");
@@ -63,7 +64,7 @@ public class Hash {
    		System.out.println("this is not exist");
    		return;
    	}
-   	addBook.deleteContact();
+   	addBook.editContact();
    }
    
    public void display() {
@@ -81,7 +82,7 @@ public class Hash {
    	
 
    	addressBook.values().stream().forEach((addBook) -> {
-           ServiceBook.addressBookMang.filter(contact -> {
+           ((Stream<ServiceBook>) ServiceBook.addressBookMang).filter(contact -> {
 
                        if (City.equalsIgnoreCase("city"))
                            return Contacts.getCity().equalsIgnoreCase(state);
@@ -98,5 +99,7 @@ public void viewState(String state) {
 }
 public static char[] get(String name) {
 	return null;
+}
+public void sortAlphabatically() {
 }
 }
