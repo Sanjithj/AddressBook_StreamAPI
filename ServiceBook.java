@@ -25,8 +25,22 @@ public class ServiceBook {
 	    System.out.println("Please enter your email id :");
 	    String email = sc.next();
 	    Contacts contact=new Contacts(first_name,last_name,Address,city,state,zip,phone_number,email);
+	    arrayOfContacts.add(contact);
 	    return contact;
 	    
+	}
+	public static void addContacts() {
+		System.out.println("how many contact you want to add");
+		int n=sc.nextInt();
+		for(int i=0;i<n;i++) {
+			Contacts con=addContact();
+			if(!arrayOfContacts.add(con)) {
+				System.out.println("name already exists");
+				i--;
+				continue;
+			}
+			System.out.println();
+		}
 	}
 	public static int edit(String name) {
 		for(Contacts contact : arrayOfContacts) {
