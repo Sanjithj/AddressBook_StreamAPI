@@ -5,6 +5,6 @@ public class AddressBookMain {
 		System.out.println("Welcome to Address Book Main");
 		ServiceBook.addContact();
 		ServiceBook.display();
-	
+		ServiceBook.editContact();
 	}
 }
