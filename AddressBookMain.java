@@ -9,7 +9,7 @@ public class AddressBookMain {
 		Scanner sc =new Scanner(System.in);
 		int option;
 		while(true) {
-			System.out.println("what operation you want perform\n 1)Add AddressBook\n 2)edit contact\n 3)delete\n4)Display contact\n5) add contact\n5) search by city");
+			System.out.println("what operation you want perform\n 1)Add AddressBook\n 2)edit contact\n 3)delete\n4)Display contact\n5) search by city 6. View by city\\n 7.view by state\"");
 			option =sc.nextInt();
 			switch(option) {
 			case 1:
@@ -27,13 +27,13 @@ public class AddressBookMain {
 			case 5:
 				addressBookser.addContact();
 			case 6:
-			    System.out.print("Enter the name of person ");
-                String name = sc.next();
-                System.out.print(" enter city: ");
-                String City = sc.next();
-                System.out.println("Enter state");
-                String state=sc.next();
-                addressBookser.find(name, state, City);
+			   	System.out.println("Enter the city");
+			    String city=sc.next();
+			    addressBookser.viewCity(city);
+			case 7:
+			    System.out.println("Enter the state");
+	         	String State=sc.next();
+			    addressBookser.viewState(State);
 			default:
 					System.out.println("Enter the option");
 			}

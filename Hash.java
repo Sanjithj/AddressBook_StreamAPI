@@ -92,4 +92,8 @@ public class Hash {
        });
    
 }
+public void viewCity(String city) {
+}
+public void viewState(String state) {
+}
 }
