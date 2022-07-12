@@ -46,5 +46,8 @@ public class Contacts {
         return " Address book contanct details are as follows : \nFirst Name is :"+first_name+"\nLast Name is "+last_name+"\nAddress is :"+Address+"\nCity is "+city
                 +"\nState is "+state+"\nZip"+zip+"\nPhone number  is "+phone_number+"\nEmail id is "+email;
     }
+	public String getLast_name() {
+		return null;
+	}
 }
 

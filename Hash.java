@@ -81,7 +81,7 @@ public class Hash {
    	
 
    	addressBook.values().stream().forEach((addBook) -> {
-           ServiceBook.addressBookMang.stream().filter(contact -> {
+           ServiceBook.addressBookMang.filter(contact -> {
 
                        if (City.equalsIgnoreCase("city"))
                            return Contacts.getCity().equalsIgnoreCase(state);
@@ -95,5 +95,8 @@ public class Hash {
 public void viewCity(String city) {
 }
 public void viewState(String state) {
+}
+public static char[] get(String name) {
+	return null;
 }
 }
