@@ -102,4 +102,8 @@ public static char[] get(String name) {
 }
 public void sortAlphabatically() {
 }
+public void sortByCity() {
+	
+	
+}
 }

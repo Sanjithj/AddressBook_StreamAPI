@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 public class ServiceBook {
 	static Scanner sc=new Scanner(System.in);
-	public static ArrayList<Contacts> listOfContacts=new ArrayList<>();
+	public static ArrayList<Contacts> listOfContacts;
 	public static HashMap<String,List<Contacts>> hashAddressBook=new HashMap<>();
 	public static HashMap<String, String> dictforcity=new HashMap<>();
 	public static HashMap<String, String> dictforstate=new HashMap<>();
@@ -69,17 +69,8 @@ public class ServiceBook {
 	    listOfContacts.add(new Contacts(first_name,last_name,Address,city,state,zip,phone_number,email));
         hashAddressBook.put(bookName, listOfContacts);
 	}
-	public static Contacts addContact() {
-		System.out.println("how many contact you want to add");
-		int n=sc.nextInt();
-		for(int i=0;i<n;i++) {
-			listOfContacts.add(addContact());
-			System.out.println();
-		}
-		return null;
-	}
 	
-	   public static void delete() {
+	public static void delete() {
 	    	System.out.println("Enter the address book you want to edit");
 	    	String deleteBook=sc.next();
 	    	ArrayList<Contacts> list=findAddressBook(deleteBook);
@@ -123,13 +114,13 @@ public class ServiceBook {
 	        boolean checkDuplicate(String First_name,String Last_name);
 	    }
 	    public static boolean duplicate(String bookName,String First_name,String Last_name) {
-	    	if(Hash.get(bookName)==null) {
+	    	if(hashAddressBook.get(bookName)==null) {
 	    		return true;
 	    	}
 	    	ArrayList<Contacts> list=(ArrayList<Contacts>) hashAddressBook.get(bookName);
 	    	HashMap<String, String> name=new HashMap<>();
 	    	for(Contacts contact:listOfContacts) {
-	    		name.put(Contacts.getFirst_name(),contact.getLast_name());
+	    		name.put(contact.getFirst_name(),contact.getLast_name());
 	    		
 	    	}
 	    	InterCheckDuplicate checkduplicates=((first_name,last_name)->{
@@ -159,8 +150,18 @@ public class ServiceBook {
         		System.out.println("Book is empty");
         		return;
         	}
-        	hashAddressBook.get(name).stream().sorted((c1,c2)->Contacts.getFirst_name().compareToIgnoreCase(c2.getFirst_name())).forEach(c->System.out.println(c));
+        	hashAddressBook.get(name).stream().sorted((c1,c2)->c1.getFirst_name().compareToIgnoreCase(c2.getFirst_name())).forEach(c->System.out.println(c));
         }
+        public static void sortByCity()
+        {
+            System.out.println("Sorted by city names:");
+            hashAddressBook.values().forEach((n)->{
+                n.stream().sorted((c1,c2) -> {
+                  return c1.getCity().compareToIgnoreCase(c2.getCity());
+                }).forEach(n1-> System.out.println(n1));
+            });
+        }
+       
 	    
 	    public static void display() {
 	    	System.out.println("Enter the name of the address book you want see");

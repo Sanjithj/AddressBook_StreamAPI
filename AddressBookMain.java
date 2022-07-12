@@ -9,7 +9,7 @@ public class AddressBookMain {
 		Scanner sc =new Scanner(System.in);
 		int option;
 		while(true) {
-			System.out.println("what operation you want perform\n 1)Add AddressBook\n 2)edit contact\n 3)delete\n4)Display contact\n5) search by city 6. View by city\\n 7.view by state\n 8.sort Alphabetically");
+			System.out.println("what operation you want perform\n 1)Add AddressBook\n 2)edit contact\n 3)delete\n4)Display contact\n5) search by city 6. View by city\\n 7.view by state\n 8.sort Alphabetically\n 9.sort city");
 			option =sc.nextInt();
 			switch(option) {
 			case 1:
@@ -36,7 +36,9 @@ public class AddressBookMain {
 			    addressBookser.viewState(State);
 			case 8:
 				 addressBookser.sortAlphabatically();
-			default:
+			
+			case 9:
+				 addressBookser.sortByCity();default:
 					System.out.println("Enter the option");
 			}
 			
